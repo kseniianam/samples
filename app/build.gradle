@@ -1,7 +1,6 @@
-plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-}
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply from: "$rootDir/versions.gradle"
 
 android {
     compileSdk 32
@@ -73,6 +72,10 @@ dependencies {
     // Integration with observables
     implementation 'androidx.compose.runtime:runtime-livedata:1.0.5'
     implementation 'androidx.compose.runtime:runtime-rxjava2:1.0.5'
+
+    // Google Drive
+    implementation "com.google.android.gms:play-services-auth:$versions.play_services_auth"
+    implementation "com.google.android.gms:play-services-drive:$versions.play_services_drive"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

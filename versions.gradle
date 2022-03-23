@@ -1,0 +1,4 @@
+ext.versions = [
+        'play_services_drive': "17.0.0",
+        'play_services_auth' : "20.1.0"
+]
