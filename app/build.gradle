@@ -55,6 +55,8 @@ dependencies {
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
 
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
+
     implementation 'androidx.compose.ui:ui:1.0.5'
     // Tooling support (Previews, etc.)
     implementation 'androidx.compose.ui:ui-tooling:1.0.5'
@@ -73,11 +75,26 @@ dependencies {
     implementation 'androidx.compose.runtime:runtime-livedata:1.0.5'
     implementation 'androidx.compose.runtime:runtime-rxjava2:1.0.5'
 
-    // Google Drive
+    // Google Sign-In
     implementation "com.google.android.gms:play-services-auth:$versions.play_services_auth"
-    implementation "com.google.android.gms:play-services-drive:$versions.play_services_drive"
+
+    // Google Drive API
+    implementation('com.google.api-client:google-api-client-android:1.32.1') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+    implementation('com.google.apis:google-api-services-drive:v3-rev20211107-1.32.1') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+
+    // Koin
+    implementation "io.insert-koin:koin-core:$versions.koin"
+    implementation "io.insert-koin:koin-android:$versions.koin"
+    implementation "io.insert-koin:koin-android-compat:$versions.koin"
+    implementation "io.insert-koin:koin-androidx-navigation:$versions.koin"
+    implementation "io.insert-koin:koin-androidx-compose:$versions.koin"
 
     testImplementation 'junit:junit:4.+'
+    testImplementation "io.insert-koin:koin-test:$versions.koin"
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 }
