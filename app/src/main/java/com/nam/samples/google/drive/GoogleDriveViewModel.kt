@@ -6,6 +6,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.Scope
 import com.google.api.services.drive.Drive
 import com.google.api.services.drive.DriveScopes
+import com.nam.samples.google.drive.extensions.searchFile
 import com.nam.samples.google.drive.extensions.uploadSeedPhrase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,12 +21,13 @@ class GoogleDriveViewModel : ViewModel() {
     val signInOptions = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
         .requestIdToken("735323908781-533nfjvakc5chg9j8dvoogr56uj9u6si.apps.googleusercontent.com")
         .requestEmail()
-        .requestScopes(Scope(DriveScopes.DRIVE_FILE))
+        .requestScopes(Scope(DriveScopes.DRIVE_FILE), Scope(DriveScopes.DRIVE_METADATA), Scope(DriveScopes.DRIVE_APPDATA))
         .build()
 
     fun onSignIn(driveService: Drive) {
         viewModelScope.launch(Dispatchers.IO) {
-            driveService.uploadSeedPhrase(SEED_PHRASE)
+            val id = driveService.uploadSeedPhrase(SEED_PHRASE)
+            driveService.searchFile(id)
         }
     }
 }
